@@ -1,0 +1,108 @@
+<%= form_for(@client) do |f| %>
+
+  <%= render 'layouts/errors', object: @client %>
+
+  <div class="row form-buttons">
+    <div class="col-md-12">
+      <div class="pull-left">
+        <h2 class="hidden-xs"><%= content_for(:page_header) %></h2>
+        <h4 class="visible-xs"><%= content_for(:page_header) %></h4>
+      </div>
+      <div class="pull-right">
+      <%= link_to clients_path, :class=>"btn btn-default" do %>
+        <i class="glyphicon glyphicon-arrow-left"></i>&nbsp;&nbsp;&nbsp;<%= t('back') %>
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" name="save_only"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;&nbsp;<%= t('save') %></button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.label :salutation, t('.salutation') %>
+      <%= f.text_field :salutation, :class=>'form-control' %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :name, t('.name')  %>
+      <%= f.text_field :name, :class=>'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :address, t('.address')  %>
+      <%= f.text_field :address, :class=>'form-control' %>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.label :zip, t('.zip')  %>
+      <%= f.text_field :zip, :class=>'form-control'%>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :city, t('.city')  %>
+      <%= f.text_field :city, :class=>'form-control'%>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.label :province, t('.province')  %>
+      <%= f.text_field :province, :class=>'form-control'%>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :country, t('.country')  %>
+      <%= f.text_field :country, :class=>'form-control'%>
+    </div>
+
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.label :vat_code, t('.vat_code') %>
+      <%= f.text_field :vat_code, :class=>'form-control'%>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :fiscal_code, t('.fiscal_code') %>
+      <%= f.text_field :fiscal_code, :class=>'form-control'%>
+    </div>
+
+    <div class="col-md-6">
+      <%= f.label :attention_to, t('.attention_to_html')  %>
+      <%= f.text_field  :attention_to, 
+                        :class=>'form-control'%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :default_term, t('.default_term')   %>
+      <%= f.text_field :default_term, :class=>'form-control' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :default_footer, t('.default_footer') %>
+      <%= select(:client, 
+            :footer_id, 
+            Footer.all.collect {|p| [ p.description, p.id ] }, 
+            {:include_blank => true},  
+            {:class => 'form-control' }) %>
+
+    </div>
+
+    <div class="col-md-2">
+      <%= f.label :invoice_language, t('.invoice_language') %>
+      <%= select(:client, 
+            :invoice_language, 
+            [['Italiano', 'it'], ['English', 'en']],
+            {},
+            {:class => 'form-control' }) %>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.label :default_notes, t('.default_notes') %>
+      <%= f.text_field :default_notes, :class=>'form-control' %>
+    </div>
+  </div>
+<% end %>

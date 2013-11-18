@@ -1,0 +1,27 @@
+  <tr>
+    <td class="col-md-7">
+      <%= item_form.text_field :description, :class => 'description-input form-control' %>
+    </td>
+    <td class="col-md-1">
+      <%= item_form.text_field :quantity, :class => 'quantity-input form-control text-right' %>
+    </td>
+    <td class="col-md-2">
+      <%= item_form.text_field :unit_cost, :class => 'unit_cost-input form-control text-right' %>
+    </td>
+    <td class="col-md-2">
+      <%= item_form.text_field :total, :value=>eur(item_form.object.total), :class => 'total-input form-control text-right' %>
+    </td>
+    <td>
+      <% unless new_record  %>
+        <%= item_form.hidden_field :id %> 
+        <%= link_to invoice_item_path(invoice.id, item_form.object.id), method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+          <i class="glyphicon glyphicon-minus"></i>
+        <% end %>
+
+      <% else %>
+          <button type="submit" class="btn btn-success btn-xs" name="save_and_add_item"><i class="glyphicon glyphicon-plus"></i></button>
+
+      <% end %>
+
+    </td>
+  </tr>

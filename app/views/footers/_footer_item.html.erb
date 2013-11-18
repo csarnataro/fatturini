@@ -1,0 +1,29 @@
+  <tr>
+    <td class="col-md-4">
+      <small>
+        <%#= item_form.inspect %>
+      </small>
+      <%= footer_item_form.text_field :description, :class => 'form-control' %>
+    </td>
+    <td class="col-md-4">
+      <%= footer_item_form.text_field :formula, :class => 'form-control' %>
+    </td>
+    <td class="col-md-4">
+      <div class="checkbox">
+        <%= footer_item_form.check_box :summable %>
+      </div>
+    </td>
+    <td>
+      <% unless new_footer_item  %>
+        <%= footer_item_form.hidden_field :id %> 
+        <%= link_to footer_footer_item_path(footer.id, footer_item_form.object.id), method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+          <i class="glyphicon glyphicon-minus"></i>
+        <% end %>
+
+      <% else %>
+          <button type="submit" class="btn btn-success btn-xs" name="save_and_add_item"><i class="glyphicon glyphicon-plus"></i></button>
+
+      <% end %>
+
+    </td>
+  </tr>

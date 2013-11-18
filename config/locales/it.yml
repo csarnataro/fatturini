@@ -1,0 +1,468 @@
+it:
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mer
+    - gio
+    - ven
+    - sab
+    abbr_month_names:
+    -
+    - gen
+    - feb
+    - mar
+    - apr
+    - mag
+    - giu
+    - lug
+    - ago
+    - set
+    - ott
+    - nov
+    - dic
+    day_names:
+    - domenica
+    - lunedì
+    - martedì
+    - mercoledì
+    - giovedì
+    - venerdì
+    - sabato
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d %B %Y'
+      short: ! '%d %b'
+    month_names:
+    -
+    - gennaio
+    - febbraio
+    - marzo
+    - aprile
+    - maggio
+    - giugno
+    - luglio
+    - agosto
+    - settembre
+    - ottobre
+    - novembre
+    - dicembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: circa un'ora
+        other: circa %{count} ore
+      about_x_months:
+        one: circa un mese
+        other: circa %{count} mesi
+      about_x_years:
+        one: circa un anno
+        other: circa %{count} anni
+      almost_x_years:
+        one: circa 1 anno
+        other: circa %{count} anni
+      half_a_minute: mezzo minuto
+      less_than_x_minutes:
+        one: meno di un minuto
+        other: meno di %{count} minuti
+      less_than_x_seconds:
+        one: meno di un secondo
+        other: meno di %{count} secondi
+      over_x_years:
+        one: oltre un anno
+        other: oltre %{count} anni
+      x_days:
+        one: 1 giorno
+        other: ! '%{count} giorni'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minuti'
+      x_months:
+        one: 1 mese
+        other: ! '%{count} mesi'
+      x_seconds:
+        one: 1 secondo
+        other: ! '%{count} secondi'
+    prompts:
+      day: Giorno
+      hour: Ora
+      minute: Minuto
+      month: Mese
+      second: Secondi
+      year: Anno
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: deve essere accettata
+      blank: non può essere lasciato in bianco
+      confirmation: non coincide con la conferma
+      empty: non può essere vuoto
+      equal_to: deve essere uguale a %{count}
+      even: deve essere pari
+      exclusion: è riservato
+      greater_than: deve essere superiore a %{count}
+      greater_than_or_equal_to: deve essere superiore o uguale a %{count}
+      inclusion: non è incluso nella lista
+      invalid: non è valido
+      less_than: deve essere meno di %{count}
+      less_than_or_equal_to: deve essere meno o uguale a %{count}
+      not_a_number: non è un numero
+      not_an_integer: non è un intero
+      odd: deve essere dispari
+      record_invalid: ! 'Validazione fallita: %{errors}'
+      taken: è già in uso
+      too_long:
+        one: è troppo lungo (il massimo è 1 carattere)
+        other: è troppo lungo (il massimo è %{count} caratteri)
+      too_short:
+        one: è troppo corto (il minimo è 1 carattere)
+        other: è troppo corto (il minimo è %{count} caratteri)
+      wrong_length:
+        one: è della lunghezza sbagliata (deve essere di 1 carattere)
+        other: è della lunghezza sbagliata (deve essere di %{count} caratteri)
+    template:
+      body: ! 'Per favore ricontrolla i seguenti campi:'
+      header:
+        one: ! 'Non posso salvare questo %{model}: 1 errore'
+        other: ! 'Non posso salvare questo %{model}: %{count} errori.'
+  helpers:
+    select:
+      prompt: Per favore, seleziona
+    submit:
+      create: Crea %{model}
+      submit: Invia %{model}
+      update: Aggiorna %{model}
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%n %u'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: .
+      precision: 2
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: Miliardi
+          million: Milioni
+          quadrillion: Biliardi
+          thousand: Mila
+          trillion: Bilioni
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Byte
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ' e '
+      two_words_connector: ! ' e '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%a %d %b %Y, %H:%M:%S %z'
+      long: ! '%d %B %Y %H:%M'
+      short: ! '%d %b %H:%M'
+    pm: pm
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors
+
+  will_paginate:
+    previous_label: Indietro
+    next_label: Avanti
+  helpers:
+    submit:
+      create: "Create"
+      update: "Save"
+
+  print: Stampa
+  back: Indietro
+  save: Salva
+
+  menu:
+    invoices: Fatture
+    clients: Clienti
+    settings: Impostazioni
+    logout: Logout
+    company_data: Dati societari
+    footers: Tipi fattura
+
+  login_message: Connessione effettuata
+  logout_message: Disconnessione effettuata
+  login_error_message: Invalid email or password. Try again.
+  sign_up_success: You've successfully signed up! You can now login.
+  already_signed_in: You're already signed in.
+  need_to_be_logged_in: La pagina richiesta è accessibile solo agli utenti autorizzati
+
+  invoice_created: Invoice was successfully created.
+  invoice_deleted: Invoice was deleted successfully.
+  invoice_updated: Invoice was successfully updated.
+
+  client_created: Client was successfully created.
+  client_deleted: Client was successfully deleted.
+  client_updated: Client was successfully updated.
+
+  choose_from_select: -- Selezionare --
+
+  company_updated: Your company was successfully updated.
+
+  activerecord:
+    models:
+      company: Company
+      user: User
+    attributes:
+      company:
+        name: Company Name
+    errors:
+      models:
+        company:
+          attributes:
+            name:
+              #blank: can't be blank
+
+  layouts:
+    application:
+      login: Login
+      sign_up: Sign Up
+      logout: Logout
+      currently_logged_in_as: You're currently logged in as
+      not_you: not you?
+      confirm_not_you: This will log you out and ask you to login again, are you sure?
+      confirm_logout: Are you sure?
+
+      invoices: Invoices
+      new_invoice: + New Invoice
+      clients: Clients
+      edit_company: Edit Company
+
+  users:
+    form:
+      email:                  Email
+      password:               Password
+      password_confirmation:  Confirm Password
+      user_type:              User Type
+      admin:                  Administrator
+      user:                   User
+      select:                 (select...)
+      company:                Company
+      save_user:              Save user
+    sign_up:
+      sign_up: Sign Up
+      email_html: Email
+      password_html: Password
+      password_confirmation_html: Confirm your password
+      company_name_html: Company name
+      company_address_html: Address <small>(not required)</small>
+      sign_up: Sign Up
+      login: Do you want to login instead?
+
+  clients:
+    form:
+      salutation:   Titolo
+      name:   Nome
+      email:  Email Address
+      zip: C. A. P.
+      city: Città
+      province: Provincia
+      country: Nazione
+      vat_code: P. IVA
+      fiscal_code: Cod. Fiscale
+      attention_to_html: All'attenzione di <small>(ad es. Ufficio Fornitori) mostrato in fattura</small>
+      address: Indirizzo
+      default_term: Condizioni di pagamento predefinite
+      default_footer: Tipo fattura predefinito
+      company_name: Company Name
+      company: Company
+      save_client: Save Client
+
+      cancel: 'Cancel & Go back'
+      confirm_cancel: Are you sure you want to cancel?
+      invoice_language: Lingua fattura
+
+    index:
+      clients: Clienti
+      new_client: Nuovo cliente
+      email: Email
+      edit: Edit
+      destroy: Delete
+      confirm_delete: Are you sure? This will delete all invoices associated with this client!
+
+      name: Nome
+      address: Indirizzo
+      company_name: Company Name
+      vat_code: P. IVA
+
+    new:
+      new_client: Nuovo cliente
+
+    edit:
+      edit_client: Modifica cliente
+
+  invoices:
+    by_client:
+      invoices: "Elenco fatture di "
+    show:
+      invoice: Invoice
+      client: Client
+      status: Status
+      draft: Draft
+      sent: Sent
+      paid: Paid
+
+      quantity: Q.tà
+      description: Descrizione
+      unit_cost: Importo unitario
+      discount: Sconto
+      total: Totale
+      items: Articoli
+
+      terms: Condizioni di pagamento
+      notes: Note
+
+      send: Send Invoice
+      invoices: Back to Invoices
+      view_pdf: View PDF
+
+      generated_at: Generated
+      created_at: Creation date
+
+    form:
+      select: (select...)
+      draft: Draft
+      sent: Sent
+      paid: Paid
+      client: Cliente
+      notes: Note
+      # if the key ends with '_html' is automatically rendered as html, i.t. not escapeds 
+      term_html: Condizioni di pagamento <small>(ad es. 30 giorni D.F. F.M.)</small>
+      footer_html: Tipo di fattura <small>(ad es. con IVA, con R.A., ecc)</small>
+
+
+      client_html: Cliente <small> Selezionare il cliente destinatario della fattura. </small>
+      status_html: Status <small> Draft, sent or already paid? </small>
+      save_invoice: Save Invoice
+      cancel: Cancel & Go Back
+      confirm_cancel: Are you sure you want to cancel?
+      notes_html: Notes <small> Does anything need clarification? Specify that here! </small>
+      terms_html: Terms <small> Set the terms and conditions for this invoice. </small>
+
+      number: Numero
+      invoice_date: Data fattura
+      quantity: Q.tà
+      description: Descrizione
+      unit_cost: Prezzo unitario
+      discount: Sconto
+      total: Totale
+      add_item: Add Item
+      items: Items
+    index:
+      back: Indietro
+      number: Numero
+      invoice_date: Data
+      total: Totale
+      invoices: Elenco fatture
+      list_invoices: Your Invoices
+      new_invoice: Nuova fattura
+      id: ID
+      client: Cliente
+      amount: Amount
+      status: Status
+      draft: Draft
+      paid: Paid
+      sent: Sent
+      date_created: Date of Creation
+      actions: Actions
+
+      show: Detail
+      pdf: PDF
+      edit: Edit
+      destroy: Delete
+      confirm_delete: Are you sure you want to delete this invoice?
+
+    new:
+      create_invoice: Nuova fattura
+
+    edit:
+      edit_invoice: Fattura
+
+    item:
+      description: Descrizione
+      quantity: Q.tà
+      unit_cost: Prezzo unitario
+      price: Importo
+
+  memos:
+    index:
+      new_memo: Nuovo memo
+      memos: Promemoria
+      vendor: Fornitore
+      goods: Acquisto
+      amount: Prezzo
+
+    new:
+      create_memo: Nuovo memo
+
+    edit:
+      edit_memo: Modifica memo
+
+    form:
+      vendor: Fornitore
+      goods: Acquisto
+      amount: Prezzo
+
+  sessions:
+    new:
+      sign_in: Login
+      login: Login
+      email: Email
+      password: Password
+      submit: Login
+      recover_password: Forgot your password?
+      sign_up: Sign up
+      remember_me: Remember me
+
+  companies:
+    edit:
+      edit_company: Edit your company
+    form:
+      name: Name
+      address: Address
+      save: Save Changes
+

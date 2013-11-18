@@ -1,0 +1,22 @@
+  <% puts "####### one line" %>
+  <tr>
+    <td class="col-lg-1">
+      <%= @item.quantity %>
+    </td>
+    <td class="col-lg-8">
+      <%= @item.description %>
+    </td>
+    <td class="col-lg-1">
+      <%= @item.unit_cost %>
+    </td>
+    <td class="col-lg-2">
+      <span class="total-price">
+        <%= number_to_currency 0 %>
+      </span>
+    </td>
+    <td>
+      <%-# = link_to invoice_item_path(form), method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+        <span class="glyphicon glyphicon-minus"></span>
+      <%-# end%>
+    </td>
+  </tr>

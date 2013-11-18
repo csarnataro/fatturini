@@ -1,0 +1,82 @@
+<%= form_for @footer do |f| %>
+  <% if @footer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@footer.errors.count, "error") %> prohibited this footer from being saved:</h2>
+
+      <ul>
+      <% @footer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row form-buttons">
+    <div class="col-md-3">
+      <h2><%= content_for(:page_header) %></h2>
+    </div>
+    <div class="col-md-3 col-md-offset-6 button-container">
+
+      <%= link_to footers_path, :class=>"btn btn-default" do %>
+        <i class="glyphicon glyphicon-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" name="save_only"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;&nbsp;Save</button>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :description %>
+      <%= f.text_field :description, :class=>"form-control" %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <!--
+    <label>
+      <h4><%= t('.items') %></h4>
+    </label>
+    -->
+
+    <table class="table" id="footer_items_table">
+      <thead>
+        <tr>
+          <th>
+            <%= t('.description') %>
+          </th>
+          <th>
+            <%= t('.formula') %>
+          </th>
+          <th>
+            <%= t('.summable') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :footer_items do |footer_item_fields| %>
+          <%= render :partial => 'footer_item', locals: {
+            :footer_item_form => footer_item_fields, 
+            :footer => @footer,
+            :new_footer_item => false
+          } %>
+        <% end %>
+        <%= f.fields_for FooterItem.new do |f| %>
+          <%= render :partial => 'footer_item', locals: {
+            :footer_item_form => f, 
+            :footer => @footer,
+            :new_footer_item => true
+          } %>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+<% end %>

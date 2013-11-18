@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">    
+
+    <title><%= app_name %> - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <%= stylesheet_link_tag    "signin", media: "all"%>
+    <%= javascript_include_tag "jquery" %> <!-- , "data-turbolinks-track" => true %> -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="javascripts/html5shiv.js"></script>
+      <script src="javascripts/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+    <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %> alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= value %>
+        </div>
+    <% end %>
+
+      <%= form_tag do_login_path, :method => :post, :class => "form-signin" do %>  
+        <h2 class="form-signin-heading"><%= t('.sign_in') %></h2>
+        <%= text_field_tag :email, nil, :class => "form-control", placeholder:t('.email'), :autofocus => :true %>
+        <%= password_field_tag :password, nil, :class => "form-control", placeholder:t('.password') %>
+
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+          <%= check_box_tag :remember_me %> <% t('.remember_me') %>
+        </label>
+        <%= submit_tag t('.submit'), :class => "btn btn-lg btn-primary btn-block" %>
+      <%end%>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script type="text/javascript">
+      $(function(){
+        setTimeout(function(){ 
+          $('.alert-info, .alert-success').fadeOut(100);
+        }, 2000); 
+
+      });      
+
+      
+    </script>
+
+  </body>
+</html>
+

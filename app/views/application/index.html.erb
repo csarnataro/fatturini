@@ -1,0 +1,43 @@
+<% title "Dashboard" %>
+
+  <h2>Dashboard</h2>
+
+
+  <table class="table" id="invoice-table">
+
+  <% @dashboard.each_key do |client| %>
+      
+      <thead>
+        <tr>
+          <th colspan="7"><h4><%= client.name %></h4></th>
+        </tr>
+        <tr>
+          <th><%= t('.number') %></th>
+          <th><%= t('.invoice_date') %></th>
+          <th><%= t('.client') %></th>
+          <th><%= t('.total') %></th>
+          <th><%= t('.payment_date') %></th>
+          <th><%= t('.status') %></th>
+          <th>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Paid: <%= @dashboard[client][:paid] %>
+          </td>
+          <td>
+            <%= @dashboard[client][:paid_invoices_sum] %>
+          </td>
+          <!-- 
+        <tr>
+          <td colspan="3"></td>
+          <td style="padding-bottom:20px;"><b><%= eur(@dashboard[client][:invoices_sum]) %></b></td>
+          <td colspan="3"></td>
+        </tr>
+            -->
+      </tbody>
+      
+  <% end%>
+</table>

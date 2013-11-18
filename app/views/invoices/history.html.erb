@@ -1,0 +1,45 @@
+  <div class="row form-buttons">
+    <div class="col-md-4">
+      <h2><%= content_for(:page_header) %> <%= t('.invoice') %> <%= @invoice.number unless @invoice.new_record? %></h2>
+    </div>
+    <div class="col-md-4 col-md-offset-4 button-container">
+
+      <%= link_to invoices_path, :class=>"btn btn-default" do %>
+        <i class="glyphicon glyphicon-arrow-left"></i>&nbsp;&nbsp;<%= t('back') %>
+      <% end %>
+
+    </div>
+  </div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t('.creation_date') %></th>
+      <th><%= t('.filename') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @versions.each do |version| %>
+      <tr>
+        <td><%= version.date %></td>
+        <td><%= version.file %></td>
+
+        <td>
+          <div class="pull-right">
+                <%= link_to invoice_history_file_path(@invoice, version.id, :format => 'pdf'), :class=>"btn btn-default btn-xs" do %>
+                  <span class="glyphicon glyphicon-download-alt" style="font-weight:normal;"></span>
+                <% end %>
+
+                <%= link_to invoice_history_file_path(@invoice, version.id), method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+                  <span class="glyphicon glyphicon-minus"></span>
+                <%end%>
+
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

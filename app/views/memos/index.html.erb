@@ -1,0 +1,56 @@
+<div class="row form-buttons">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h2 class="hidden-xs"><%= t('.memos') %></h2>
+      <h4 class="visible-xs"><%= t('.memos') %></h4>
+    </div>
+    <!-- div class="col-md-4 col-md-offset-4 button-container" -->
+    <div class="pull-right">
+    <%= link_to new_memo_path, :class=>'btn btn-primary pull-right' do %> 
+      <span class="glyphicon glyphicon-plus"></span>
+      <%= t('.new_memo') %>
+    <% end %>
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= t('.vendor') %></th>
+        <th><%= t('.goods') %></th>
+        <th><%= t('.amount') %></th>
+        <th><%= t('.creation_date') %></th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @memos.each do |memo| %>
+        <tr>
+          <td><%= memo.vendor %></td>
+          <td><%= memo.goods %></td>
+          <td><%= eur(memo.amount) %></td>
+          <td><%= memo.creation_date %></td>
+          <!--
+            <button type="button" class="btn btn-primary btn-xs">Extra small button</button>
+    <button type="button" class="btn btn-default btn-xs">Extra small button</button>
+          -->
+          <td>
+            <div class="pull-right">
+              <%= link_to memo_path(memo), :class=>"btn btn-default btn-xs" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <%end%>
+
+              <%= link_to memo, method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+                <span class="glyphicon glyphicon-minus"></span>
+              <%end%>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- //.table-responsive -->
+<br>

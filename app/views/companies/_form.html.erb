@@ -1,0 +1,84 @@
+<%= form_for(@company) do |f| %>
+
+  <%= render 'layouts/errors', object: @company %>
+
+  <div class="row form-buttons">
+    <div class="col-md-3">
+      <h2><%= content_for(:page_header) %></h2>
+    </div>
+    <div class="col-md-4 col-md-offset-5 button-container">
+
+      <%= link_to companies_path, :class=>"btn btn-default" do %>
+        <i class="glyphicon glyphicon-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" name="save_only"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;&nbsp;Save</button>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :name %>
+      <%= f.text_field :name, :class=>"form-control" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :address %>
+      <%= f.text_field :address, :class=>"form-control" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :invoice_header %>
+      <%= f.text_area :invoice_header, :class=>"form-control", :rows => 8 %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :invoice_footer %>
+      <%= f.text_area :invoice_footer, :class=>"form-control", :rows => 8 %>
+    </div>
+
+  </div>
+
+  <div class="row" style="border-bottom:1px;">
+    <div class="col-md-12">
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="control-group">
+      <div class="col-md-4">
+        <%= f.label :bank_name %>
+        <%= f.text_field :bank_name, :class=>"form-control" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :iban %>
+        <%= f.text_field :iban, :class=>"form-control" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.label :account_holder %>
+        <%= f.text_field :account_holder, :class=>"form-control" %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :branch %>
+      <%= f.text_field :branch, :class=>"form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :bic, "BIC/SWIFT" %>
+      <%= f.text_field :bic, :class=>"form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :branch_bic, "BIC/SWIFT BRANCH" %>
+      <%= f.text_field :branch_bic, :class=>"form-control" %>
+    </div>
+
+  </div>
+
+
+<% end %>

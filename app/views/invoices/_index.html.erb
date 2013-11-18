@@ -1,0 +1,47 @@
+<div class="row form-buttons">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h2 class="hidden-xs"><%= content_for(:page_header) %></h2>
+      <h4 class="visible-xs"><%= content_for(:page_header) %></h4>
+    </div>
+    <!-- div class="col-md-4 col-md-offset-2 button-container" -->
+    <div class="pull-right">
+    <% if @client %>
+      <%= link_to clients_path, :class=>'btn btn-default' do %> 
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        <%= t('.back') %>
+      <% end %>
+    <% end %>
+    <%= link_to new_invoice_path, :class=>'btn btn-primary' do %> 
+      <span class="glyphicon glyphicon-plus"></span><%= t('.new_invoice') %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover" id="invoice-table">
+  <thead>
+    <tr>
+      <th><%= t('.number') %></th>
+      <th><%= t('.invoice_date') %></th>
+      <th><%= t('.client') %></th>
+      <th><%= t('.total') %></th>
+      <th><%= t('.payment_date') %></th>
+      <th><%= t('.status') %></th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <%= render 'invoice_table_row', :invoice => invoice %>
+    <% end %>
+    <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td><b><%= eur(@invoices_sum) %></b></td>
+      </tr>
+    </tfoot>
+  </tbody>
+</table>

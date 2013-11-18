@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @memo.vendor %>
+</p>
+
+<p>
+  <strong>Goods:</strong>
+  <%= @memo.goods %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @memo.amount %>
+</p>
+<!--
+<p>
+  <strong>Company:</strong>
+  <%= @memo.company %>
+</p>
+-->
+<%= link_to 'Edit', edit_memo_path(@memo) %> |
+<%= link_to 'Back', memos_path %>

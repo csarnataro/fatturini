@@ -1,0 +1,51 @@
+<%= form_for(@memo) do |f| %>
+
+  <%= render 'layouts/errors', object: @memo %>
+
+  <div class="row form-buttons">
+    <div class="col-md-12">
+      <div class="pull-left">
+        <h2 class="hidden-xs"><%= content_for(:page_header) %></h2>
+        <h4 class="visible-xs"><%= content_for(:page_header) %></h4>
+      </div>
+      <!-- div class="col-md-4 col-md-offset-4 button-container" -->
+      <div class="pull-right">
+      <%= link_to memos_path, :class=>"btn btn-default" do %>
+        <i class="glyphicon glyphicon-arrow-left"></i>&nbsp;&nbsp;&nbsp;<%= t('back') %>
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" name="save_only"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;&nbsp;<%= t('save') %></button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.label :vendor, t('.vendor') %><br>
+      <%= f.text_field :vendor, :class=>"form-control" %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :goods, t('.goods') %><br>
+      <%= f.text_field :goods, :class=>"form-control" %>
+    </div>
+    <div class="col-md-3">
+      <%= f.label :amount, t('.amount') %><br>
+      <%= f.text_field :amount, :class=>"form-control" %>
+    </div>
+
+    <% unless @memo.new_record?  %>
+    <div class="col-md-3">
+      <%= f.label :creation_date, t('.creation_date') %><br>
+      <%= f.text_field :creation_date, :class=>"form-control datepicker", 
+                      'data-date-format' => "dd/mm/yyyy",
+                      :value => @memo.try(:creation_date).try(:strftime,'%d/%m/%Y')
+      %>
+    </div>
+    
+    <% end %>
+
+  </div>
+  <% end %>
+
+

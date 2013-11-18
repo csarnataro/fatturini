@@ -1,19 +1,89 @@
-RailsApp::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+Fatturini::Application.routes.draw do
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  resources :memos
+  get "/m" => "memos#new"
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  # oauth
+  get "/signin" => "services#signin"
+  delete "/signout" => "services#signout"
+
+  get '/auth/:service/callback' => 'services#create' 
+  get '/auth/failure' => 'services#failure'
+
+  resources :services, :only => [:index, :create, :destroy] do
+    collection do
+      get 'signin'
+      get 'signout'
+      get 'signup'
+      post 'newaccount'
+      get 'failure'
+    end
+  end
+
+
+  get '/dashboard' => 'application#dashboard'
+
+  # render json defaults in invoice creation
+  resources :clients do
+    member do
+      get 'defaults', :action => :defaults
+    end
+  end
+
+  # invoices by client
+  get 'invoices/client/:client_id' => 'invoices#by_client', :as => 'invoice_by_client'
+
+  get 'invoices/:id/history/:file_id' => 'invoices#download_file', :as => 'invoice_history_file'
+  delete 'invoices/:id/history/:file_id' => 'invoices#delete_history_file' #, :as => 'invoice_history_file'
+
+
+
+  resources :invoices do
+
+    member do
+      get 'print'
+      get 'history'
+      # get 'register/:participant_type_id', :action => 'register'
+    end
+
+    resources :items
+  end
+
+
+  resources :footers do
+    resources :footer_items
+  end
+
+  resources :companies
+
+  resources :users
+
+  
+
+
+#  controller :users do
+#    get "sign_up", :action => :sign_up, :as => :sign_up
+#    post "sign_up", :action => :public_create, :as => :public_user_create
+#  end
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+
+  # You can have the root of your site routed with "root"
+  root 'application#index'
+
+  # Example of regular route:
+  #   get 'products/:id' => 'catalog#view'
+
+  # Example of named route that can be invoked with purchase_url(id: product.id)
+  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+
+  # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # Sample resource route with options:
+  # Example resource route with options:
   #   resources :products do
   #     member do
   #       get 'short'
@@ -25,34 +95,31 @@ RailsApp::Application.routes.draw do
   #     end
   #   end
 
-  # Sample resource route with sub-resources:
+  # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller
   #   end
 
-  # Sample resource route with more complex sub-resources
+  # Example resource route with more complex sub-resources:
   #   resources :products do
   #     resources :comments
   #     resources :sales do
-  #       get 'recent', :on => :collection
+  #       get 'recent', on: :collection
   #     end
   #   end
+  
+  # Example resource route with concerns:
+  #   concern :toggleable do
+  #     post 'toggle'
+  #   end
+  #   resources :posts, concerns: :toggleable
+  #   resources :photos, concerns: :toggleable
 
-  # Sample resource route within a namespace:
+  # Example resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end

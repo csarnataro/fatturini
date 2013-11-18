@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  invoice: 
+  description: MyText
+  unit_cost: 
+  unit_cost: 
+  quantity: 1
+  discount: 
+  discount: 
+
+two:
+  invoice: 
+  description: MyText
+  unit_cost: 
+  unit_cost: 
+  quantity: 1
+  discount: 
+  discount: 
