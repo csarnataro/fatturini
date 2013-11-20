@@ -119,7 +119,7 @@ class Invoice < ActiveRecord::Base
 
   # inner class for showing invoices versions
   class Version
-    attr_accessor :date, :file, :id
+    attr_accessor :date, :file, :id, :latest
 
   end
 
@@ -138,12 +138,15 @@ class Invoice < ActiveRecord::Base
       # do nothing
     end
 
-
+    idx = 0
     files.sort.reverse.each do |file|
       next if file == '.' || file == '..' || File.extname(file) != '.pdf'
-      # do work on real items
 
       version = Version.new
+
+      version.latest = true if idx == 0
+      
+      idx = idx + 1
       
       date_as_string = file.split(/-/).first #'20/09/2013 13:12:00'
       

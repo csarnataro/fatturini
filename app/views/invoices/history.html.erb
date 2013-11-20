@@ -15,6 +15,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th></th>
       <th><%= t('.creation_date') %></th>
       <th><%= t('.filename') %></th>
       <th></th>
@@ -23,7 +24,8 @@
 
   <tbody>
     <% @versions.each do |version| %>
-      <tr>
+      <tr <% if version.latest  %> class="paid" <% end%> >
+        <td><% if version.latest  %><i class="glyphicon glyphicon-ok"></i><% end%></td>
         <td><%= version.date %></td>
         <td><%= version.file %></td>
 
