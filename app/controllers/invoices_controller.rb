@@ -79,7 +79,7 @@ class InvoicesController < ApplicationController
     file_id = params[:file_id]
 
     right_file = nil
-    dir = "#{Rails.root}/data/#{current_user.company.id}/#{@invoice.id}/"
+    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{@invoice.id}/"
     Dir.foreach(dir) do |file|
       next if file == '.' || file == '..' || File.extname(file) != '.pdf'
       right_file = file if file.starts_with? file_id
@@ -96,7 +96,7 @@ class InvoicesController < ApplicationController
     file_id = params[:file_id]
 
     right_file = nil
-    dir = "#{Rails.root}/data/#{current_user.company.id}/#{@invoice.id}/"
+    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{@invoice.id}/"
     Dir.foreach(dir) do |file|
       next if file == '.' || file == '..' || File.extname(file) != '.pdf'
       File.delete("#{dir}#{file}") if file.starts_with? file_id

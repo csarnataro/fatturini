@@ -127,7 +127,7 @@ class Invoice < ActiveRecord::Base
   def get_versions(current_user)
     # [{:date => '20/09/2013 13:12:00', :file => 'Abc.pdf' }]
 
-    dir = "data/#{current_user.company.id}/#{self.id}/"
+    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{self.id}/"
     versions = []
     files = []
 
@@ -182,7 +182,7 @@ class Invoice < ActiveRecord::Base
 
     update_attributes(:status => :sent)
 
-    dir = "data/#{current_user.company.id}/#{self.id}/"
+    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{self.id}/"
 
     unless File.directory?(dir)
       FileUtils.mkdir_p(dir)
