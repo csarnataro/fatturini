@@ -11,18 +11,24 @@
       <%= link_to invoice_path(invoice), :class=>"btn btn-default btn-xs" do %>
         <span class="glyphicon glyphicon-pencil"></span>
       <%end%>
-
+        <!--
         <%= link_to history_invoice_path(invoice), 
               :class=>"btn btn-default btn-xs", 
               :disabled => (invoice.status == 'draft')  do %>
           <span class="glyphicon glyphicon-extra history"></span>
         <% end %>
+        -->
+          <%= link_to invoice_history_latest_file_path(invoice, :format => 'pdf'), :class=>"btn btn-default btn-xs" do %>
+            <span class="glyphicon glyphicon-download-alt" style="font-weight:normal;"></span>
+          <% end %>
+          
+        
         <%= link_to invoice, 
               :method => :delete, 
               :class=>"btn btn-danger btn-xs", 
               :disabled => (invoice.status != 'draft'),
               data: { confirm: 'Are you sure?' }  do %>
-          <span class="glyphicon glyphicon-minus"></span>
+          <span class="glyphicon glyphicon-trash"></span>
         <%end%>
 
     </div>

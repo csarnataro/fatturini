@@ -10,7 +10,8 @@ class InvoicesController < ApplicationController
                     :print, 
                     :history, 
                     :download_file, 
-                    :delete_history_file
+                    :delete_history_file,
+                    :download_latest_file
                 ]
 
 
@@ -74,42 +75,40 @@ class InvoicesController < ApplicationController
   def history
     @versions = @invoice.get_versions(current_user)
   end
+  
+  def latest_pdf
+    @versions = @invoice.get_latest_version(current_user)
+  end
+  
 
   def download_file
     file_id = params[:file_id]
 
-    right_file = nil
-    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{@invoice.id}/"
-    Dir.foreach(dir) do |file|
-      next if file == '.' || file == '..' || File.extname(file) != '.pdf'
-      right_file = file if file.starts_with? file_id
-    end
+    file_to_download = @invoice.get_pdf(current_user, file_id)
 
-    unless right_file.nil?
-      send_file("#{dir}/#{right_file}",
-            filename: right_file,
-            type: "application/pdf")
-    end
+    not_found and return unless file_to_download
+
+    send_file(file_to_download,
+          filename: File.basename(file_to_download),
+          type: "application/pdf")
   end
+
+
+  def download_latest_file
+    file_to_download = @invoice.get_latest_pdf(current_user)
+
+    not_found and return unless file_to_download
+
+    send_file(file_to_download,
+          filename: File.basename(file_to_download),
+          type: "application/pdf")
+  end
+
 
   def delete_history_file
     file_id = params[:file_id]
 
-    right_file = nil
-    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{@invoice.id}/"
-    Dir.foreach(dir) do |file|
-      next if file == '.' || file == '..' || File.extname(file) != '.pdf'
-      File.delete("#{dir}#{file}") if file.starts_with? file_id
-
-    end
-
-    remaining_pdf_files = 0
-    Dir.foreach(dir) do |file|
-      next if file == '.' || file == '..' || File.extname(file) != '.pdf'
-      remaining_pdf_files += 1
-    end
-
-    @invoice.update_attributes(:status => :draft)
+    @invoice.delete_pdf(current_user, file_id)
 
     redirect_to history_invoice_path(@invoice)
   end

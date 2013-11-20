@@ -34,8 +34,10 @@ Fatturini::Application.routes.draw do
   # invoices by client
   get 'invoices/client/:client_id' => 'invoices#by_client', :as => 'invoice_by_client'
 
-  get 'invoices/:id/history/:file_id' => 'invoices#download_file', :as => 'invoice_history_file'
-  delete 'invoices/:id/history/:file_id' => 'invoices#delete_history_file' #, :as => 'invoice_history_file'
+  get 'invoices/:id/archive/latest' => 'invoices#download_latest_file', :as => :invoice_history_latest_file
+
+  get 'invoices/:id/archive/:file_id' => 'invoices#download_file', :as => 'invoice_history_file'
+  delete 'invoices/:id/archive/:file_id' => 'invoices#delete_history_file' #, :as => 'invoice_history_file'
 
 
 
@@ -43,7 +45,9 @@ Fatturini::Application.routes.draw do
 
     member do
       get 'print'
-      get 'history'
+      # get 'archive', :action => :history
+      get 'archive', :action => 'history', :as => 'history'
+      
       # get 'register/:participant_type_id', :action => 'register'
     end
 

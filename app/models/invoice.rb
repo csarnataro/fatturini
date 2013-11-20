@@ -1,6 +1,7 @@
 class Invoice < ActiveRecord::Base
   include SessionsHelper
-
+  include PdfManager
+  
   self.per_page = 10
 
   belongs_to :client
@@ -115,54 +116,6 @@ class Invoice < ActiveRecord::Base
     end
     ret
   end
-
-
-  # inner class for showing invoices versions
-  class Version
-    attr_accessor :date, :file, :id, :latest
-
-  end
-
-
-  def get_versions(current_user)
-    # [{:date => '20/09/2013 13:12:00', :file => 'Abc.pdf' }]
-
-    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{self.id}/"
-    versions = []
-    files = []
-
-    begin
-      # if the directory doesn't exist yet
-      Dir.foreach(dir) { |path| files << path }
-    rescue
-      # do nothing
-    end
-
-    idx = 0
-    files.sort.reverse.each do |file|
-      next if file == '.' || file == '..' || File.extname(file) != '.pdf'
-
-      version = Version.new
-
-      version.latest = true if idx == 0
-      
-      idx = idx + 1
-      
-      date_as_string = file.split(/-/).first #'20/09/2013 13:12:00'
-      
-      date = DateTime.strptime(date_as_string,"%Y%m%d%H%M%S")
-
-      version.date = date.strftime("%d/%m/%Y %H:%M:%S")
-      version.file = file
-      version.id = date_as_string
-      versions << version
-
-    end
-
-    versions
-
-  end
-
 
   def payment_status
     return :expired if payment_date && payment_date.past? && status != 'paid'
