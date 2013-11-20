@@ -26,14 +26,14 @@
   <body>
 
     <div class="container">
-
+      <!--
     <% flash.each do |key, value| %>
         <div class="<%= flash_class(key) %> alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <%= value %>
         </div>
     <% end %>
-
+        -->
       <%= form_tag do_login_path, :method => :post, :class => "form-signin" do %>  
         <h2 class="form-signin-heading"><%= t('.sign_in') %></h2>
         <%= text_field_tag :email, nil, :class => "form-control", placeholder:t('.email'), :autofocus => :true %>
