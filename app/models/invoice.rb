@@ -139,7 +139,7 @@ class Invoice < ActiveRecord::Base
     end
 
 
-    files.reverse.each do |file|
+    files.sort.reverse.each do |file|
       next if file == '.' || file == '..' || File.extname(file) != '.pdf'
       # do work on real items
 
