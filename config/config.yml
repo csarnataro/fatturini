@@ -4,4 +4,4 @@ test:
   data_dir: data
 
 production:
-  data_dir: <% ENV['OPENSHIFT_DATA_DIR'] %> 
+  data_dir: <%= ENV['OPENSHIFT_DATA_DIR'] %> 
