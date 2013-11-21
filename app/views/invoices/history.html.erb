@@ -11,37 +11,38 @@
     </div>
   </div>
 
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th></th>
-      <th><%= t('.creation_date') %></th>
-      <th><%= t('.filename') %></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @versions.each do |version| %>
-      <tr <% if version.latest  %> class="paid" <% end%> >
-        <td><% if version.latest  %><i class="glyphicon glyphicon-ok"></i><% end%></td>
-        <td><%= version.date %></td>
-        <td><%= version.file %></td>
-
-        <td>
-          <div class="pull-right">
-                <%= link_to invoice_history_file_path(@invoice, version.id, :format => 'pdf'), :class=>"btn btn-default btn-xs" do %>
-                  <span class="glyphicon glyphicon-download-alt" style="font-weight:normal;"></span>
-                <% end %>
-
-                <%= link_to invoice_history_file_path(@invoice, version.id), method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
-                  <span class="glyphicon glyphicon-trash"></span>
-                <%end%>
-
-          </div>
-        </td>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th><%= t('.creation_date') %></th>
+        <th><%= t('.filename') %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @versions.each do |version| %>
+        <tr <% if version.latest  %> class="active" <% end%> >
+          <td><% if version.latest  %><i class="glyphicon glyphicon-ok"></i><% end%></td>
+          <td><%= version.date %></td>
+          <td><%= version.file %></td>
+
+          <td>
+            <div class="pull-right">
+                  <%= link_to invoice_history_file_path(@invoice, version.id, :format => 'pdf'), :class=>"btn btn-default btn-xs" do %>
+                    <span class="glyphicon glyphicon-download-alt" style="font-weight:normal;"></span>
+                  <% end %>
+
+                  <%= link_to invoice_history_file_path(@invoice, version.id), method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                  <%end%>
+
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- // .table-responsive -->

@@ -13,46 +13,45 @@
   </div>
 </div>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('.name') %></th>
-      <th><%= t('.address') %></th>
-      <th><%= t('.vat_code') %></th>
-      <th>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @clients.each do |client| %>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td><%= client.name %></td>
-        <td><%= client.full_address %></td>
-        <td><%= client.vat_code %></td>
-        <!--
-          <button type="button" class="btn btn-primary btn-xs">Extra small button</button>
-  <button type="button" class="btn btn-default btn-xs">Extra small button</button>
-        -->
-        <td>
-          <div class="pull-right">
-            <%= link_to client_path(client), :class=>"btn btn-default btn-xs" do %>
-              <span class="glyphicon glyphicon-pencil"></span>
-            <%end%>
-
-            <%= link_to invoice_by_client_path(client), :class=>"btn btn-default btn-xs", :title => t('menu.invoices')  do %>
-              <span class="glyphicon glyphicon-th-list"></span>
-            <%end%>
-
-            <%= link_to client, method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
-              <span class="glyphicon glyphicon-trash"></span>
-            <%end%>
-          </div>
-        </td>
+        <th><%= t('.name') %></th>
+        <th><%= t('.address') %></th>
+        <th><%= t('.vat_code') %></th>
+        <th>
+        </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.name %></td>
+          <td><%= client.full_address %></td>
+          <td><%= client.vat_code %></td>
+          <!--
+            <button type="button" class="btn btn-primary btn-xs">Extra small button</button>
+    <button type="button" class="btn btn-default btn-xs">Extra small button</button>
+          -->
+          <td>
+            <div class="pull-right">
+              <%= link_to client_path(client), :class=>"btn btn-default btn-xs" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <%end%>
 
+              <%= link_to invoice_by_client_path(client), :class=>"btn btn-default btn-xs", :title => t('menu.invoices')  do %>
+                <span class="glyphicon glyphicon-th-list"></span>
+              <%end%>
+
+              <%= link_to client, method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <%end%>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- // .table-responsive -->

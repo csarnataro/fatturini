@@ -19,29 +19,31 @@
   </div>
 </div>
 
-<table class="table table-hover" id="invoice-table">
-  <thead>
-    <tr>
-      <th><%= t('.number') %></th>
-      <th><%= t('.invoice_date') %></th>
-      <th><%= t('.client') %></th>
-      <th><%= t('.total') %></th>
-      <th><%= t('.payment_date') %></th>
-      <th><%= t('.status') %></th>
-      <th>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <%= render 'invoice_table_row', :invoice => invoice %>
-    <% end %>
-    <tfoot>
+<div class="table-responsive">
+  <table class="table table-hover" id="invoice-table">
+    <thead>
       <tr>
-        <td colspan="3"></td>
-        <td><b><%= eur(@invoices_sum) %></b></td>
+        <th><%= t('.number') %></th>
+        <th><%= t('.invoice_date') %></th>
+        <th><%= t('.client') %></th>
+        <th><%= t('.total') %></th>
+        <th><%= t('.payment_date') %></th>
+        <th><%= t('.status') %></th>
+        <th>
+        </th>
       </tr>
-    </tfoot>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @invoices.each do |invoice| %>
+        <%= render 'invoice_table_row', :invoice => invoice %>
+      <% end %>
+      <tfoot>
+        <tr>
+          <td colspan="3"></td>
+          <td><b><%= eur(@invoices_sum) %></b></td>
+        </tr>
+      </tfoot>
+    </tbody>
+  </table>
+</div> <!-- // .table-responsive -->

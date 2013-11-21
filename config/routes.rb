@@ -24,6 +24,8 @@ Fatturini::Application.routes.draw do
 
   get '/dashboard' => 'application#dashboard'
 
+  post 'change_year/:year' => 'application#change_year', :as => :change_year
+
   # render json defaults in invoice creation
   resources :clients do
     member do

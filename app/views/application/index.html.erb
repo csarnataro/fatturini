@@ -1,9 +1,10 @@
 <% title "Dashboard" %>
 
-  <h2>Dashboard</h2>
+<h2>Dashboard</h2>
 
+<div class="table-responsive">
 
-  <table class="table" id="invoice-table">
+  <table class="table table-hover" id="invoice-table">
 
   <% @dashboard.each_key do |client| %>
       
@@ -40,4 +41,5 @@
       </tbody>
       
   <% end%>
-</table>
+  </table>
+</div> <!-- // .table-responsive -->

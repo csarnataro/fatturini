@@ -17,19 +17,21 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t('menu.settings') %> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Anno: <%= current_year %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-
-                <li><%= link_to t('menu.footers'), footers_path %></li>
-                <li><%= link_to t('menu.company_data'), company_path(current_user.company.id) %></li>
-                <% if current_user.admin? %>
-                  <li class="divider"></li>
-                  <li><%= link_to t('menu.companies'), companies_path %></li>
-                  <li><%= link_to t('menu.users'), users_path %></li>
-                <% end %>
+                <li><%= link_to "2013", change_year_path(2013), :method => :post %></li>
+                <li><%= link_to "2014", change_year_path(2014), :method => :post %></li>
               </ul>
             </li>
 
+            <!--
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t('menu.settings') %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+
+              </ul>
+            </li>
+              -->
             <!-- 
             <li>
               <%= link_to t('.logout') + " | " + I18n.locale, signout_path, :title => current_user.email, :method=>:delete %>
@@ -41,6 +43,16 @@
                 <li>
                   <%= link_to t('menu.logout'), signout_path, :title => (current_user.email + " - " + I18n.locale.to_s), :method=>:delete %>
                 </li>
+                <li class="divider"></li>
+
+                <li><%= link_to t('menu.footers'), footers_path %></li>
+                <li><%= link_to t('menu.company_data'), company_path(current_user.company.id) %></li>
+                <% if current_user.admin? %>
+                  <li class="divider"></li>
+                  <li><%= link_to t('menu.companies'), companies_path %></li>
+                  <li><%= link_to t('menu.users'), users_path %></li>
+                <% end %>
+
               </ul>
             </li>
 

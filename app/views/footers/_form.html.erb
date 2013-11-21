@@ -43,39 +43,39 @@
     </label>
     -->
 
-    <table class="table" id="footer_items_table">
-      <thead>
-        <tr>
-          <th>
-            <%= t('.description') %>
-          </th>
-          <th>
-            <%= t('.formula') %>
-          </th>
-          <th>
-            <%= t('.summable') %>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= f.fields_for :footer_items do |footer_item_fields| %>
-          <%= render :partial => 'footer_item', locals: {
-            :footer_item_form => footer_item_fields, 
-            :footer => @footer,
-            :new_footer_item => false
-          } %>
-        <% end %>
-        <%= f.fields_for FooterItem.new do |f| %>
-          <%= render :partial => 'footer_item', locals: {
-            :footer_item_form => f, 
-            :footer => @footer,
-            :new_footer_item => true
-          } %>
-        <% end %>
+      <table class="table" id="footer_items_table">
+        <thead>
+          <tr>
+            <th>
+              <%= t('.description') %>
+            </th>
+            <th>
+              <%= t('.formula') %>
+            </th>
+            <th>
+              <%= t('.summable') %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :footer_items do |footer_item_fields| %>
+            <%= render :partial => 'footer_item', locals: {
+              :footer_item_form => footer_item_fields, 
+              :footer => @footer,
+              :new_footer_item => false
+            } %>
+          <% end %>
+          <%= f.fields_for FooterItem.new do |f| %>
+            <%= render :partial => 'footer_item', locals: {
+              :footer_item_form => f, 
+              :footer => @footer,
+              :new_footer_item => true
+            } %>
+          <% end %>
 
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+  </div> <!-- // .row -->
 
 
 

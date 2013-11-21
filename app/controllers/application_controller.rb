@@ -1,16 +1,31 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!, :except => [:not_found]
-  # before_filter :authorize, :login_from_cookie
-
+  before_filter :set_current_year
 
   helper_method :current_user
   helper_method :user_signed_in?
+  helper_method :current_year
 
   def not_found
     render(:file => "#{Rails.root.to_s}/public/404.html", :layout => false, :status => 404, :content_type => Mime::HTML)
   end
 
+
+  def set_current_year
+    cookies[:current_year] = Date.today.year unless cookies[:current_year] 
+  end
+
+  def current_year
+    cookies[:current_year] 
+  end
+
+  def change_year
+    year = params[:year]
+    # TODO: check validity of the input parameter 
+    cookies[:current_year] = year
+    redirect_to root_path
+  end
 
   def index
     # render :layout => false
@@ -54,7 +69,9 @@ class ApplicationController < ActionController::Base
       
     def authenticate_user!
       if !current_user
-        flash[:error] = 'You need to sign in before accessing this page!'
+        
+        flash[:error] = "You need to sign in before accessing this page: [#{request.fullpath}]" if request.fullpath != '/'
+
         redirect_to signin_services_path
       end
     end

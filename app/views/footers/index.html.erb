@@ -1,34 +1,36 @@
 <% title "Footers" %>
 <h2>Footers</h2>
-<table class="table table-hover">
-    <thead>
-    <tr>
-      <th>Description</th>
-      <th>
-          <%= link_to new_footer_path, :class=>'btn btn-primary pull-right' do %> 
-            <span class="glyphicon glyphicon-plus"></span>
-            New Footer
-          <% end %>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @footers.each do |footer| %>
+<div class="table-responsive">
+  <table class="table table-hover">
+      <thead>
       <tr>
-        <td><%= footer.description %></td>
-        <td>
-          <div class="pull-right">
-            <%= link_to edit_footer_path(footer), :class=>"btn btn-default btn-xs" do %>
-              <span class="glyphicon glyphicon-pencil"></span>
-            <%end%>
-            <%= link_to footer, method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
-              <span class="glyphicon glyphicon-trash"></span>
-            <%end%>
-          </div>
-        </td>
-
+        <th>Description</th>
+        <th>
+            <%= link_to new_footer_path, :class=>'btn btn-primary pull-right' do %> 
+              <span class="glyphicon glyphicon-plus"></span>
+              New Footer
+            <% end %>
+        </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @footers.each do |footer| %>
+        <tr>
+          <td><%= footer.description %></td>
+          <td>
+            <div class="pull-right">
+              <%= link_to edit_footer_path(footer), :class=>"btn btn-default btn-xs" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <%end%>
+              <%= link_to footer, method: :delete, :class=>"btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }  do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <%end%>
+            </div>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- // .table-responsive -->
