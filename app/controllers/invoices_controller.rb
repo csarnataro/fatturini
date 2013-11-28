@@ -15,12 +15,11 @@ class InvoicesController < ApplicationController
                 ]
 
 
-
   # GET /invoices
   # GET /invoices.json
   def index
     # @invoices = Invoice.order('invoice_date DESC') # equivalent of .all, which is deprecated
-    @invoices = Invoice.where(
+    @invoices = Invoice.by_year(current_year).where(
                   'client_id in (?)', 
                   current_user.company.clients.to_a.collect(&:id)).paginate(:page => params[:page]).order('invoice_date DESC')
     @invoices_sum = @invoices.collect(&:total).sum

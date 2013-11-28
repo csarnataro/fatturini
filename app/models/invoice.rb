@@ -84,7 +84,8 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.by_year(year)
-    dt = DateTime.new(year)
+    p "*********** by_year is #{year}"
+    dt = DateTime.new(year.to_i)
     boy = dt.beginning_of_year
     eoy = dt.end_of_year
     where("invoice_date >= ? and invoice_date <= ?", boy, eoy)
