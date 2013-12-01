@@ -62,7 +62,7 @@ class InvoicesController < ApplicationController
         # removing the timestamp from the beginning of the file
         pdf_file_name = pdf_file_name[pdf_file_name.index('-')+1 .. pdf_file_name.length]
         sleep(1)
-        send_file("#{Rails.root}/#{generated_file_name}",
+        send_file(generated_file_name,
               filename: pdf_file_name,
               type: "application/pdf")
       end
@@ -77,6 +77,10 @@ class InvoicesController < ApplicationController
   
   def latest_pdf
     @versions = @invoice.get_latest_version(current_user)
+    
+    not_found and return unless @versions
+    
+    @versions
   end
   
 

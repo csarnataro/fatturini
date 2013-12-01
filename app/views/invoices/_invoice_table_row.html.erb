@@ -18,7 +18,11 @@
           <span class="glyphicon glyphicon-extra history"></span>
         <% end %>
         -->
-          <%= link_to invoice_history_latest_file_path(invoice, :format => 'pdf'), :class=>"btn btn-default btn-xs" do %>
+          <%= link_to invoice_history_latest_file_path(
+                  invoice, 
+                  :format => 'pdf'), 
+                  :disabled => (invoice.status == 'draft'),
+                  :class=>"btn btn-default btn-xs" do %>
             <span class="glyphicon glyphicon-download-alt" style="font-weight:normal;"></span>
           <% end %>
           

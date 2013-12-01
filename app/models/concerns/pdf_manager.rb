@@ -108,6 +108,7 @@ module PdfManager
       Dir.foreach(dir) { |path| files << path }
     rescue
       # do nothing
+      return nil
     end
     
     idx = 0
