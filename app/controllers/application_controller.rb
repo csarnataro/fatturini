@@ -45,6 +45,11 @@ class ApplicationController < ActionController::Base
     # render :layout => false
     @dashboard = {}
     
+    
+    @total_paid = 0
+    @total_sent = 0
+    @total_expired = 0
+    
     Client.where(:company_id => current_user.company.id).order('name').each do |client|
     #current_user.company.clients.each do |client|
       @invoices = Invoice.by_year(current_year).where('client_id = (?)', client.id)
@@ -52,12 +57,14 @@ class ApplicationController < ActionController::Base
       next if @invoices.count == 0
       @dashboard[client] = {}
       
-       @paid_invoices = 0
-       @paid_invoices_sum = 0
-       @expired_invoices = 0
-       @expired_invoices_sum = 0
-       @sent_invoices = 0
-       @sent_invoices_sum = 0
+      @paid_invoices = 0
+      @paid_invoices_sum = 0
+      @expired_invoices = 0
+      @expired_invoices_sum = 0
+      @sent_invoices = 0
+      @sent_invoices_sum = 0
+
+      
       
       @invoices.each do |invoice|
         
@@ -65,13 +72,15 @@ class ApplicationController < ActionController::Base
         when 'paid' # don't know why !!!
           @paid_invoices = @paid_invoices + 1 
           @paid_invoices_sum = @paid_invoices_sum + invoice.total
+          @total_paid = @total_paid + invoice.total
         when 'expired'
           @expired_invoices = @expired_invoices + 1
           @expired_invoices_sum = @expired_invoices_sum + invoice.total
-          
+          @total_expired = @total_expired + invoice.total
         else
           @sent_invoices = @sent_invoices + 1
           @sent_invoices_sum = @sent_invoices_sum + invoice.total 
+          @total_sent = @total_sent + invoice.total
         end
       end
       #  = @invoices.find_all{|invoice|  }

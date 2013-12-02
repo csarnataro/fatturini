@@ -12,7 +12,12 @@
       
         <thead>
           <tr>
-            <th colspan="2"><h4><%= client.name %></h4></th>
+            <th colspan="2">
+              <%= link_to invoice_by_client_path(client), :style => 'color:rgb(44, 62, 80);' do %>
+                <h4><%= client.name %></h4>
+                <%end%>
+            
+            </th>
           </tr>
           <!--
           <tr>
@@ -34,7 +39,7 @@
               Expired: <%= @dashboard[client][:expired] %>
             </td>
             <td>
-              <%= @dashboard[client][:expired_invoices_sum] %>
+              <%= eur(@dashboard[client][:expired_invoices_sum]) %>
             </td>
           </tr>
           <% end %>
@@ -45,7 +50,7 @@
               Pending: <%= @dashboard[client][:sent] %>
             </td>
             <td>
-              <%= @dashboard[client][:sent_invoices_sum] %>
+              <%= eur(@dashboard[client][:sent_invoices_sum]) %>
             </td>
           </tr>
           <% end %>
@@ -56,21 +61,58 @@
               Paid: <%= @dashboard[client][:paid] %>
             </td>
             <td>
-              <%= @dashboard[client][:paid_invoices_sum] %>
+              <%= eur(@dashboard[client][:paid_invoices_sum]) %>
             </td>
           </tr>
           <% end %>
-        
-            <!-- 
-          <tr>
-            <td colspan="3"></td>
-            <td style="padding-bottom:20px;"><b><%= eur(@dashboard[client][:invoices_sum]) %></b></td>
-            <td colspan="3"></td>
-          </tr>
-              -->
+
         </tbody>
       
     <% end%>
+
+
+    <thead>
+      <tr>
+        <th colspan="2">
+          <%= link_to invoices_path, :style => 'color:rgb(44, 62, 80);' do %>
+            <h4>Total</h4>
+            <%end%>
+        
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="expired">
+        <td>
+          Total expired
+        </td>
+        <td>
+          <%= eur(@total_expired) %>
+        </td>
+      </tr>
+
+      <tr class="sent">
+        <td>
+          Total pending
+        </td>
+        <td>
+          <%= eur(@total_sent) %>
+        </td>
+      </tr>
+
+      <tr class="paid">
+        <td>
+          Total paid
+        </td>
+        <td>
+          <%= eur(@total_paid) %>
+        </td>
+      </tr>
+
+    </tbody>
+
+
+
     </table>
   <% end %>
 </div> <!-- // .table-responsive -->
