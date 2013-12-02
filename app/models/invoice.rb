@@ -119,7 +119,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def payment_status
-    return :expired if payment_date && payment_date.past? && status != 'paid'
+    return 'expired' if payment_date && payment_date.past? && status != 'paid'
     return status
   end
 
@@ -137,7 +137,7 @@ class Invoice < ActiveRecord::Base
     # pdf.text "Hello There"
     # pdf.render_file "example.pdf"
 
-    update_attributes(:status => :sent)
+    update_attributes(:status => 'sent')
 
     dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{self.id}/"
 

@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
         when 'paid' # don't know why !!!
           @paid_invoices = @paid_invoices + 1 
           @paid_invoices_sum = @paid_invoices_sum + invoice.total
-        when :expired
+        when 'expired'
           @expired_invoices = @expired_invoices + 1
           @expired_invoices_sum = @expired_invoices_sum + invoice.total
           
