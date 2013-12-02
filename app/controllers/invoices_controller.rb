@@ -32,7 +32,7 @@ class InvoicesController < ApplicationController
     client_id = params[:client_id] 
 
     if current_user.company.clients.to_a.collect(&:id).include?(client_id.to_i) 
-      @invoices = Invoice.where('client_id = (?)', client_id).order('invoice_date DESC')
+      @invoices = Invoice.by_year(current_year).where('client_id = (?)', client_id).order('invoice_date DESC')
       @invoices_sum = @invoices.collect(&:total).sum
       
       @client = Client.find(client_id)

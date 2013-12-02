@@ -108,6 +108,10 @@ en:
       edit_client: Edit Client
 
   invoices:
+    by_client:
+      invoices: "Invoice list of "
+      invoices_title: "Invoices - "
+    
     show:
       invoice: Invoice
       client: Client
@@ -180,7 +184,7 @@ en:
       description: Description
       quantity: Q.ty
       unit_cost: Unit price
-      price: Amount
+      price: Amount      
 
   sessions:
     new:

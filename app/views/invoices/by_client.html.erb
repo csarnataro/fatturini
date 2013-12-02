@@ -1,4 +1,4 @@
-<% title t('.invoices') %>
+<% title (t('.invoices_title') + ' ' + @client.name) %>
 <% header (t('.invoices') + ' ' + @client.name) %>
 
 <%= render 'index' %>

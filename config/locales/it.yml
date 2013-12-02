@@ -338,6 +338,7 @@ it:
   invoices:
     by_client:
       invoices: "Elenco fatture di "
+      invoices_title: "Fatture -"
     show:
       invoice: Invoice
       client: Client
