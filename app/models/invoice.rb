@@ -41,13 +41,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def total
-    # TODO: add all footer items
     ret = base_amount
+
     footer_items.each do |footer_item|
       ret = ret + footer_item[:calculated_value].to_f if footer_item[:summable]
     end
 
     ret
+  end
+
+  def self.valid_years
+    
+    min_year = Invoice.minimum('substr(number, 6, 9)').to_i
+
+    max_year = Date.today.year + 1
+    
+    return min_year..max_year
+
   end
 
   def initialize_suggested_values
@@ -98,7 +108,8 @@ class Invoice < ActiveRecord::Base
     unless footer.nil?
       # prepare evaluated formulas
       footer.footer_items.each do |footer_item| 
-        description = footer_item.description
+        # description = footer_item.description
+        # percentage_label = footer_item.percentage_label
         instanced_formula = footer_item.formula % {:TOT => base_amount}
 
         # evaluating 
@@ -111,7 +122,12 @@ class Invoice < ActiveRecord::Base
           end
         }.call
 
-        ret << {:description => description, :calculated_value => calculated_value, :summable => footer_item.summable}
+        ret << {
+          :percentage_label => footer_item.percentage_label,
+          :description => footer_item.description, 
+          :calculated_value => calculated_value, 
+          :summable => footer_item.summable
+        }
       end
 
     end

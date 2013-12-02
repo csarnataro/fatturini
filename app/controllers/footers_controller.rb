@@ -100,14 +100,15 @@ class FootersController < ApplicationController
           :description,
           :value,
           :summable,
-          :formula
+          :formula,
+          :percentage_label
         ]
       )
 
     end
 
     def new_footer_item_params 
-      params.require(:footer).require(:footer_item).permit(:id, :description, :value, :summable, :formula)
+      params.require(:footer).require(:footer_item).permit(:id, :description, :value, :summable, :percentage_label, :formula)
     end
 
 

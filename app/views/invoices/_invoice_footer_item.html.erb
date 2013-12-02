@@ -1,6 +1,12 @@
 <tr>
-  <td class="col-md-10 text-right" colspan="3" >
-    <h5><%= footer_item[:description] %></h5>
+  <td class="col-md-8 text-right" colspan="2" >
+    <%# n.b. this is not an instance of footer_item object, it's a map built in invoice controller %>
+    <h5><%= footer_item[:description] %></h5> 
+  </td>
+  <td class="col-md-2 text-right" >
+    <h5>
+      <%= footer_item[:percentage_label] %>
+    </h5>
   </td>
   <td class="col-md-2">
     <input class="text-right form-control white-readonly" readonly="readonly" type="text" 

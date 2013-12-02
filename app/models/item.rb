@@ -22,25 +22,4 @@ class Item < ActiveRecord::Base
 
     end
 
-
-=begin  
-
-  def total=(value) 
-    if unit_cost.kind_of? Integer and quantity.kind_of? Integer
-      total = unit_cost  * quantity # * ((100 - discount) / 100.0)  
-    else
-      total = value.to_f
-    end
-
   end
-
-
-
-  def total_price
-    unit_cost  * quantity # * ((100 - discount) / 100.0)
-  rescue # NoMethodError => method
-    return 0
-  end
-=end
-
-end

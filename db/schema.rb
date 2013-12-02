@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022183726) do
+ActiveRecord::Schema.define(version: 20131202114956) do
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20131022183726) do
     t.integer "footer_id"
     t.string  "default_value"
     t.boolean "summable"
+    t.string  "percentage_label"
   end
 
   add_index "footer_items", ["footer_id"], name: "index_footer_items_on_footer_id", using: :btree

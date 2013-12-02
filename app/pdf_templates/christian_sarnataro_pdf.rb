@@ -194,10 +194,18 @@ def _build_pdf
 
     items.unshift header
 
+
+    percentage_label_width = 15
+
     footer_items = @invoice.footer_items.collect do |item|
-      [item[:description], '', @view.eur_pdf(item[:calculated_value])]
+      [item[:description], item[:percentage_label] , @view.eur_pdf(item[:calculated_value])]
     end
 
+    @invoice.footer_items.each do |item|
+      if item[:percentage_label] != nil && percentage_label_width != 35
+        percentage_label_width = 35  
+      end
+    end
 
 
     (18 - items.length - footer_items.length).times{items<<['','','','']}
@@ -233,7 +241,6 @@ def _build_pdf
 
     end
 
-
     table(footer_items, :width => bounds.width) do
 
       # BORDERS
@@ -250,7 +257,7 @@ def _build_pdf
       row((footer_items.length - 1)).column(1).style(:borders => [:bottom])
 
       # CELL WIDTHS
-      columns(1).style( :width => 15)
+      columns(1).style( :width => percentage_label_width)
       columns(2).style( :width => 90)
       #columns(2).style( :width => 90)
       #columns(3).style( :width => 90)

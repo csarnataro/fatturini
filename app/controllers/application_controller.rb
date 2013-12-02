@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
 
     cookies[:current_year] = Date.today.year unless cookies[:current_year]
     
+    @valid_years = Invoice.valid_years
+    
   end
 
 

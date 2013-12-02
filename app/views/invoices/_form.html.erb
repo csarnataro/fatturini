@@ -144,12 +144,6 @@
           </td>
         </tr>
         <% @invoice.footer_items.each_with_index do |footer_item, index| %>
-          <%
-           if index == 0 %>
-            <%#= render :partial => 'invoice_footer_item', locals: {
-              :footer_item => {:description => t('.base_amount'), :calculated_value => @invoice.base_amount}
-            } %>
-          <% end %>
           <%= render :partial => 'invoice_footer_item', locals: {
             :footer_item => footer_item
           } %>

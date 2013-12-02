@@ -19,8 +19,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Anno: <%= current_year %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "2013", change_year_path(2013), :method => :post %></li>
-                <li><%= link_to "2014", change_year_path(2014), :method => :post %></li>
+                <% @valid_years.each do | year| %>
+                <li><%= link_to year, change_year_path(year), :method => :post %></li>
+                <% end %>
               </ul>
             </li>
 

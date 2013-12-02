@@ -20,6 +20,10 @@
 </div>
 
 <div class="table-responsive">
+  <% if @invoices.count == 0 %>
+  No data available for year <%= current_year %>
+  <% else %>
+  
   <table class="table table-hover" id="invoice-table">
     <thead>
       <tr>
@@ -46,4 +50,5 @@
       </tfoot>
     </tbody>
   </table>
+  <% end %>
 </div> <!-- // .table-responsive -->

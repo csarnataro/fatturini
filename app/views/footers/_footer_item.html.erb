@@ -1,14 +1,14 @@
   <tr>
-    <td class="col-md-4">
-      <small>
-        <%#= item_form.inspect %>
-      </small>
+    <td class="col-md-5">
       <%= footer_item_form.text_field :description, :class => 'form-control' %>
+    </td>
+    <td class="col-md-2">
+      <%= footer_item_form.text_field :percentage_label, :class => 'form-control' %>
     </td>
     <td class="col-md-4">
       <%= footer_item_form.text_field :formula, :class => 'form-control' %>
     </td>
-    <td class="col-md-4">
+    <td class="col-md-1">
       <div class="checkbox">
         <%= footer_item_form.check_box :summable %>
       </div>
