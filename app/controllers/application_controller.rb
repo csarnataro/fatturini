@@ -52,23 +52,44 @@ class ApplicationController < ActionController::Base
       next if @invoices.count == 0
       @dashboard[client] = {}
       
+       @paid_invoices = 0
+       @paid_invoices_sum = 0
+       @expired_invoices = 0
+       @expired_invoices_sum = 0
+       @sent_invoices = 0
+       @sent_invoices_sum = 0
       
-      @paid_invoices = @invoices.find_all{|invoice| invoice.payment_status == 'paid' }
-      @paid_invoices_sum = @paid_invoices.collect(&:total).sum
-      
-      @dashboard[client][:paid] = @paid_invoices.length
+      @invoices.each do |invoice|
+        
+        case invoice.payment_status
+        when 'paid' # don't know why !!!
+          @paid_invoices = @paid_invoices + 1 
+          @paid_invoices_sum = @paid_invoices_sum + invoice.total
+        when :expired
+          @expired_invoices = @expired_invoices + 1
+          @expired_invoices_sum = @expired_invoices_sum + invoice.total
+          
+        else
+          @sent_invoices = @sent_invoices + 1
+          @sent_invoices_sum = @sent_invoices_sum + invoice.total 
+        end
+      end
+      #  = @invoices.find_all{|invoice|  }
+      # @paid_invoices_sum = @paid_invoices.collect(&:total).sum
+      # 
+      @dashboard[client][:paid] = @paid_invoices
       @dashboard[client][:paid_invoices_sum] = @paid_invoices_sum
-
-      @expired_invoices = @invoices.find_all{|invoice| invoice.payment_status == 'expired' }
-      @expired_invoices_sum = @expired_invoices.collect(&:total).sum
-      
-      @dashboard[client][:expired] = @expired_invoices.length
+      # 
+      #  = @invoices.find_all{|invoice| invoice.payment_status == :expired }
+      #  = @expired_invoices.collect(&:total).sum
+      # 
+      @dashboard[client][:expired] = @expired_invoices
       @dashboard[client][:expired_invoices_sum] = @expired_invoices_sum
-
-      @sent_invoices = @invoices.find_all{|invoice| invoice.payment_status != 'expired' &&  invoice.payment_status != 'paid'}
-      @sent_invoices_sum = @sent_invoices.collect(&:total).sum
-      
-      @dashboard[client][:sent] = @sent_invoices.length
+      # 
+      #  = @invoices.find_all{|invoice| invoice.payment_status != :expired &&  invoice.payment_status != :paid}
+      #  = @sent_invoices.collect(&:total).sum
+      # 
+      @dashboard[client][:sent] = @sent_invoices
       @dashboard[client][:sent_invoices_sum] = @sent_invoices_sum
 
 
