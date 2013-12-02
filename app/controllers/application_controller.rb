@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
     @total_paid = 0
     @total_sent = 0
     @total_expired = 0
+    @invoices_sum = 0
     
     Client.where(:company_id => current_user.company.id).order('name').each do |client|
     #current_user.company.clients.each do |client|
@@ -63,11 +64,10 @@ class ApplicationController < ActionController::Base
       @expired_invoices_sum = 0
       @sent_invoices = 0
       @sent_invoices_sum = 0
-
       
       
       @invoices.each do |invoice|
-        
+        @invoices_sum = @invoices_sum + invoice.total
         case invoice.payment_status
         when 'paid' # don't know why !!!
           @paid_invoices = @paid_invoices + 1 
