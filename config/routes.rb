@@ -1,5 +1,7 @@
 Fatturini::Application.routes.draw do
 
+  resources :payment_modes
+
   resources :memos
   get "/m" => "memos#new"
 

@@ -24,20 +24,6 @@
                 <% end %>
               </ul>
             </li>
-
-            <!--
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t('menu.settings') %> <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-
-              </ul>
-            </li>
-              -->
-            <!-- 
-            <li>
-              <%= link_to t('.logout') + " | " + I18n.locale, signout_path, :title => current_user.email, :method=>:delete %>
-            </li>
-              -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -48,6 +34,7 @@
 
                 <li><%= link_to t('menu.footers'), footers_path %></li>
                 <li><%= link_to t('menu.company_data'), company_path(current_user.company.id) %></li>
+                <li><%= link_to t('menu.payment_mode'), payment_modes_path %></li>
                 <% if current_user.admin? %>
                   <li class="divider"></li>
                   <li><%= link_to t('menu.companies'), companies_path %></li>

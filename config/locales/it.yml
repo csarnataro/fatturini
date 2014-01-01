@@ -365,6 +365,8 @@ it:
       created_at: Creation date
 
     form:
+      payment_date: Data pagamento
+      payment_mode: Modalità pagamento 
       select: (select...)
       draft: Draft
       sent: Sent
@@ -467,3 +469,10 @@ it:
       address: Address
       save: Save Changes
 
+  payment_modes:
+    index:
+      payment_modes: Modalità di pagamento
+      name: Codice
+      description: Descrizione completa
+      is_default: Predefinita
+      new_payment_mode: Nuova modalità

@@ -104,6 +104,7 @@ class ClientsController < ApplicationController
         :vat_code,
         :attention_to,
         :default_term,
+        :payment_mode_id,
         :footer_id,
         :invoice_language,
         :default_notes

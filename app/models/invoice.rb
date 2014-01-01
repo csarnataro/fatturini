@@ -4,18 +4,19 @@ class Invoice < ActiveRecord::Base
   
   self.per_page = 10
 
-  belongs_to :client
   has_many :items, -> { order("id") }, :dependent => :destroy
+  belongs_to :client
+  belongs_to :payment_mode
   belongs_to :footer
   accepts_nested_attributes_for :items, :allow_destroy => true
   validates_uniqueness_of :number
+  
   after_initialize :initialize_suggested_values
   # validates :status, :inclusion => { :in => ['draft', 'sent', 'paid'] }
 
 
   validate :invoice_number_format
   validates :number, :client, :presence => true
- 
 
   def Invoice.fake 
     i = Invoice.new
@@ -90,6 +91,8 @@ class Invoice < ActiveRecord::Base
       self.number||= "#{max_number}/#{suggested_year}"
       # puts current_year_invoices.inspect
 
+      self.payment_mode = PaymentMode.where(:is_default => true).first
+
     end
   end
 
@@ -147,44 +150,21 @@ class Invoice < ActiveRecord::Base
     end
   end
 
-  def generate_pdf(current_user, view_context)
 
-    # pdf = Prawn::Document.new
-    # pdf.text "Hello There"
-    # pdf.render_file "example.pdf"
-
-    update_attributes(:status => 'sent')
-
-    dir = "#{APP_CONFIG['data_dir']}/#{current_user.company.id}/#{self.id}/"
-
-    unless File.directory?(dir)
-      FileUtils.mkdir_p(dir)
+  def payment_info(current_user)
+    info = PaymentInfo.new
+    
+    if !payment_mode
+      info.payment_mode = PaymentMode.where({:is_default => true}).first
+    else
+      info.payment_mode = payment_mode
     end
-    client_name = client.name.gsub(/\W/, "").gsub(/\d/,"").camelize
-    company_name = current_user.company.name.gsub(/\W/, "").gsub(/\d/,"").camelize
-    invoice_number_for_file_system = self.number.split('/').first + "-" + self.number.split('/').last
-    timestamp = DateTime.now.strftime('%Y%m%d%H%M%S')
-
-    pdf_file_name = "#{timestamp}-#{company_name}-#{invoice_number_for_file_system}-#{client_name}.pdf"
-    pdf_full_path = "#{dir}/#{pdf_file_name}"
-
-    # companyName is used also for the pdf template
-    company_name += 'Pdf'
-
-    begin
-      pdf = company_name.constantize.new(self, view_context)
-
-    rescue => e
-      pdf = InvoicePdf.new(self, view_context)
-      puts e.inspect
-    end
-
-
-    pdf.render_file pdf_full_path
-
-    # return the pdf_full_path to the controller, which can send it back to the browser
-    pdf_full_path
+    info.payment_term = term
+    
+    return info
   end
+
+
 
 
 end

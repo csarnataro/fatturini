@@ -36,22 +36,6 @@ def _build_pdf
         move_down lineheight_y
       end
 
-
-
-# => :     text_box "Christian Sarnataro", :at => [address_x,  cursor], :size => 18, :style => :bold
-#      move_down lineheight_y*1.5
-#      text_box "Via Antonio Sacchini, 1", :at => [address_x,  cursor]
-#      move_down lineheight_y
-#      text_box "20131 Milano", :at => [address_x,  cursor]
-#      move_down lineheight_y
-#      text_box "Tel: +39 349 0895840", :at => [address_x,  cursor]
-#      move_down lineheight_y
-#      text_box "Email: christian.sarnataro@gmail.com", :at => [address_x,  cursor]
-#      move_down lineheight_y
-#      text_box "Partita IVA: IT07661970967", :at => [address_x,  cursor]
-#      move_down lineheight_y
-#      text_box "Codice Fiscale: SRNCRS71A21E507C", :at => [address_x,  cursor]
-#      move_down lineheight_y
     end
 
 
@@ -131,17 +115,22 @@ def _build_pdf
         stroke_rounded_rectangle([-10, 10], bounds.right, lineheight_y*9, 20)
 
 
-        unless current_user.company.account_holder.blank?
-          enhanced_text_box '{it=>Pagamento con bonifico bancario|en=>Payment via wire transfer}'
-          move_down lineheight_y
+        payment_info = @invoice.payment_info(current_user)
 
-          unless @invoice.term.blank?
-            enhanced_text_box '{it=>Condizioni di pagamento|en=>Payment terms}:'
-            text_box @invoice.term, :at => [address_x+130,  cursor]
-          end
-          move_down lineheight_y
+        if payment_info.payment_mode
+          enhanced_text_box '{it=>Modalità di pagamento|en=>Payment type}: ' 
+          enhanced_text_box payment_info.payment_mode.full_description, :at => [address_x+130,  cursor] 
+        end
+        move_down lineheight_y
 
-          
+        if payment_info.payment_term
+          enhanced_text_box '{it=>Condizioni di pagamento|en=>Payment terms}: ' 
+          enhanced_text_box payment_info.payment_term, :at => [address_x+130,  cursor]
+        end
+        move_down lineheight_y
+
+
+        if payment_info.payment_mode.bank_info_required?
           enhanced_text_box '{it=>Intestazione|en=>Account holder}:'
           text_box current_user.company.account_holder, :at => [address_x+130,  cursor]
           move_down lineheight_y
@@ -165,7 +154,6 @@ def _build_pdf
           enhanced_text_box 'BIC/SWIFT {it=>|en=>BRANCH}:', :at => [address_x,  cursor]
           text_box current_user.company.branch_bic, :at => [address_x+130,  cursor]
         end
-
       end
     end
 

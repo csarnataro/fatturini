@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @payment_mode.name %>
+</p>
+
+<p>
+  <strong>Full description:</strong>
+  <%= @payment_mode.full_description %>
+</p>
+
+<p>
+  <strong>Is default:</strong>
+  <%= @payment_mode.is_default %>
+</p>
+
+<%= link_to 'Edit', edit_payment_mode_path(@payment_mode) %> |
+<%= link_to 'Back', payment_modes_path %>

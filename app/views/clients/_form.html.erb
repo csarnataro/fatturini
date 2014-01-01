@@ -78,7 +78,7 @@
       <%= f.text_field :default_term, :class=>'form-control' %>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= f.label :default_footer, t('.default_footer') %>
       <%= select(:client, 
             :footer_id, 
@@ -88,6 +88,19 @@
 
     </div>
 
+    <div class="col-md-3">
+      <%= f.label :default_payment_mode, t('.default_payment_mode') %>
+      <%= select(:client, 
+            :payment_mode_id, 
+            PaymentMode.all.collect {|p| [ p.name, p.id ] }, 
+            {:include_blank => true},  
+            {:class => 'form-control' }) %>
+
+    </div>
+
+
+  </div>
+  <div class="row">
     <div class="col-md-2">
       <%= f.label :invoice_language, t('.invoice_language') %>
       <%= select(:client, 
@@ -97,10 +110,7 @@
             {:class => 'form-control' }) %>
 
     </div>
-
-  </div>
-  <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-10">
       <%= f.label :default_notes, t('.default_notes') %>
       <%= f.text_field :default_notes, :class=>'form-control' %>
     </div>

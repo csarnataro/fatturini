@@ -1,0 +1,60 @@
+<% title t('.payment_modes') %>
+<% header t('.payment_modes') %>
+
+<div class="row form-buttons">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h2 class="hidden-xs"><%= content_for(:page_header) %></h2>
+      <h4 class="visible-xs"><%= content_for(:page_header) %></h4>
+    </div>
+    <!-- div class="col-md-4 col-md-offset-2 button-container" -->
+    <div class="pull-right">
+    <%= link_to new_payment_mode_path, :class=>'btn btn-primary' do %> 
+      <span class="glyphicon glyphicon-plus"></span> <%= t('.new_payment_mode') %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover" id="payment-modes-table">
+    <thead>
+      <tr>
+        <th><%= t('.name') %></th>
+        <th><%= t('.description') %></th>
+        <th><%= t('.is_default') %></th>
+        <th><%= t('.bank_info_required') %></th>
+        <th>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @payment_modes.each do |payment_mode| %>
+      <tr>
+        <td><%= payment_mode.name %></td>
+        <td><%= payment_mode.full_description %></td>
+        <td><%= check_box_tag 'is_default_readonly', true, payment_mode.is_default?, {:readonly => true, :onclick => 'return false'} %> 
+        </td>
+        <td><%= check_box_tag 'bank_info_required', true, payment_mode.bank_info_required?, {:readonly => true, :onclick => 'return false'} %> 
+        </td>
+        <td>
+          <div class="pull-right">
+      
+          <%= link_to payment_mode_path(payment_mode), :class=>"btn btn-default btn-xs" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <%end%>
+            <%= link_to payment_mode, 
+                  :method => :delete, 
+                  :class=>"btn btn-danger btn-xs", 
+                  data: { confirm: 'Are you sure?' }  do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <%end%>
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div> <!-- // .table-responsive -->
+

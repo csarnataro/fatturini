@@ -4,7 +4,15 @@
 en:
 
   page_header: Edit model
-en:
+  
+  menu:
+    invoices: Fatture
+    clients: Clienti
+    settings: Impostazioni
+    logout: Logout
+    company_data: Dati societari
+    footers: Tipi fattura
+  
   helpers:
     submit:
       create: "Create"

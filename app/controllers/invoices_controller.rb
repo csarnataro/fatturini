@@ -213,6 +213,7 @@ class InvoicesController < ApplicationController
         :client_id,
         :invoice_date,
         :payment_date,
+        :payment_mode_id,
         :footer_id,
         :items_attributes => [:id, :description, :quantity, :unit_cost, :total]
       )

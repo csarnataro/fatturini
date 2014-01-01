@@ -1,0 +1,39 @@
+<%= form_for(@payment_mode) do |f| %>
+  <%= render 'layouts/errors', object: @payment_mode %>
+
+  <div class="row form-buttons">
+    <div class="col-md-4">
+      <h2><%= content_for(:page_header) %></h2>
+    </div>
+    <div class="col-md-3 col-md-offset-5 button-container">
+
+      <%= link_to payment_modes_path, :class=>"btn btn-default" do %>
+        <i class="glyphicon glyphicon-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back
+      <% end %>
+
+      <button type="submit" class="btn btn-primary" name="save_only"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;&nbsp;&nbsp;Save</button>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, :class=>"form-control" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :full_description %><br>
+      <%= f.text_field :full_description, :class=>"form-control" %>
+    </div>
+    <div class="col-md-2">
+      <%= f.label :is_default %><br>
+      <%= f.check_box :is_default %>
+    </div>
+    <div class="col-md-2">
+      <%= f.label :bank_info_required %><br>
+      <%= f.check_box :bank_info_required %>
+    </div>
+  </div>
+
+<% end %>

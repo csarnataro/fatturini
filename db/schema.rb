@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202114956) do
+ActiveRecord::Schema.define(version: 20140101213547) do
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -33,10 +33,12 @@ ActiveRecord::Schema.define(version: 20131202114956) do
     t.integer  "footer_id"
     t.string   "invoice_language"
     t.string   "default_notes"
+    t.integer  "payment_mode_id"
   end
 
   add_index "clients", ["company_id"], name: "index_clients_on_company_id", using: :btree
   add_index "clients", ["footer_id"], name: "index_clients_on_footer_id", using: :btree
+  add_index "clients", ["payment_mode_id"], name: "index_clients_on_payment_mode_id", using: :btree
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -90,10 +92,12 @@ ActiveRecord::Schema.define(version: 20131202114956) do
     t.date     "payment_date"
     t.string   "number"
     t.integer  "footer_id"
+    t.integer  "payment_mode_id"
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
   add_index "invoices", ["footer_id"], name: "index_invoices_on_footer_id", using: :btree
+  add_index "invoices", ["payment_mode_id"], name: "index_invoices_on_payment_mode_id", using: :btree
 
   create_table "items", force: true do |t|
     t.integer  "invoice_id"
@@ -119,6 +123,15 @@ ActiveRecord::Schema.define(version: 20131202114956) do
   end
 
   add_index "memos", ["company_id"], name: "index_memos_on_company_id", using: :btree
+
+  create_table "payment_modes", force: true do |t|
+    t.string   "name"
+    t.string   "full_description"
+    t.boolean  "is_default"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "bank_info_required"
+  end
 
   create_table "services", force: true do |t|
     t.integer  "user_id"

@@ -28,8 +28,8 @@ class BasePdf < Prawn::Document
 
     font "Helvetica"
 
-    info = { :Title => "Sample METADATA",
-             :Author => "Author",
+    info = { :Title => "Invoice",
+             :Author => "Fatturini - Invoicing application",
              :Subject => "Invoice",
              :CreationDate => Time.now }
 
@@ -41,7 +41,7 @@ class BasePdf < Prawn::Document
 
     unless @invoice.client.nil?
       country = @invoice.client.country
-
+      puts "CCCCCCCCCCCCCC Country [#{country}] CCCCCCCCCCCCCC"
       if !country.blank?
         if country.strip.downcase[0,2] != 'it'
           I18n.locale = 'en'

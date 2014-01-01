@@ -7,8 +7,11 @@ class Client < ActiveRecord::Base
   
   belongs_to :company
   has_one :footer
+  has_one :payment_mode
   has_many :invoices, :dependent => :restrict_with_exception
+  after_initialize :initialize_suggested_values
 
+  
 
   def full_address
     full_address = "#{address} #{zip} #{city}"
@@ -46,5 +49,11 @@ class Client < ActiveRecord::Base
       zac += " - #{country.upcase}"
     end
     zac
+  end
+  
+  
+private
+  def initialize_suggested_values
+    # self.payment_mode = PaymentMode.where(:is_default => true).first
   end
 end
