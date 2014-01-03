@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
     def authenticate_user!
       if !current_user
 
-        if Rails.env == :production
+        if Rails.env.production?
           flash[:error] = "You need to sign in before accessing this page: [#{request.fullpath}]" if request.fullpath != '/'
           redirect_to signin_services_path
         else
