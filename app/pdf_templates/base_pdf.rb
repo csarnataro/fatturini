@@ -37,7 +37,7 @@ class BasePdf < Prawn::Document
   end
 
   def build_pdf  
-    default_locale = I18n.locale
+    default_locale = 'it' #I18n.locale
 
     unless @invoice.client.nil?
       country = @invoice.client.country
@@ -91,6 +91,7 @@ class BasePdf < Prawn::Document
     @view.t("invoices#{key}")
   end
 
+private
   ##
   # in a line which contains one or more patterns of the form {en:VAT ID|it:P. IVA}, 
   # replace the pattern with the corresponding value
