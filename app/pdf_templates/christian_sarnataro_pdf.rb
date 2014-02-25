@@ -124,7 +124,7 @@ def _build_pdf
         move_down lineheight_y
 
         if payment_info.payment_term
-          enhanced_text_box '{it=>Condizioni di pagamento|en=>Payment terms}: ' 
+          enhanced_text_box '{it=>Termini di pagamento|en=>Payment terms}: ' 
           enhanced_text_box payment_info.payment_term, :at => [address_x+130,  cursor]
         end
         move_down lineheight_y

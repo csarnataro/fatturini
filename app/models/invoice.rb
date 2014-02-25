@@ -69,11 +69,7 @@ class Invoice < ActiveRecord::Base
       self.invoice_date||= Date.new((Date.today>>1).year, (Date.today>>1).month,1) - 1
 
       # the maximum year saved in the database, if exists, otherwise the current year
-      begin
-        suggested_year = Invoice.maximum('substr(number, 6, 9)').to_i
-      rescue
-        suggested_year = Date.today.year
-      end
+      suggested_year = Date.today.year
 
       # find all invoices for the suggested year
       current_year_invoices = Invoice.by_year(suggested_year)
@@ -87,7 +83,9 @@ class Invoice < ActiveRecord::Base
           max_number=current_number
         end
       end
+
       max_number = "%04d" % (max_number += 1)
+      logger.debug("**** Max number is #{max_number}")
       self.number||= "#{max_number}/#{suggested_year}"
       # puts current_year_invoices.inspect
 

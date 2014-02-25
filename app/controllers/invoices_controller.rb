@@ -21,7 +21,8 @@ class InvoicesController < ApplicationController
     # @invoices = Invoice.order('invoice_date DESC') # equivalent of .all, which is deprecated
     @invoices = Invoice.by_year(current_year).where(
                   'client_id in (?)', 
-                  current_user.company.clients.to_a.collect(&:id)).paginate(:page => params[:page]).order('invoice_date DESC')
+                  current_user.company.clients.to_a.collect(&:id)).paginate(:page => params[:page])
+                    .order('invoice_date DESC, number DESC')
     @invoices_sum = @invoices.collect(&:total).sum
 
   end
