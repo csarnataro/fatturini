@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
   include SessionsHelper
   include PdfManager
-  
+
   self.per_page = 10
 
   has_many :items, -> { order("id") }, :dependent => :destroy
@@ -10,7 +10,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :footer
   accepts_nested_attributes_for :items, :allow_destroy => true
   validates_uniqueness_of :number
-  
+
   after_initialize :initialize_suggested_values
   # validates :status, :inclusion => { :in => ['draft', 'sent', 'paid'] }
 
@@ -18,7 +18,7 @@ class Invoice < ActiveRecord::Base
   validate :invoice_number_format
   validates :number, :client, :presence => true
 
-  def Invoice.fake 
+  def Invoice.fake
     i = Invoice.new
     i.id = -1
     return i
@@ -29,15 +29,15 @@ class Invoice < ActiveRecord::Base
       errors.add(:number, "invalid format")
     end
   end
- 
 
 
-  def base_amount  
+
+  def base_amount
     partial = 0
     self.items.each do |item|
       partial += item.total unless item.total.nil?
     end
-    
+
     partial
   end
 
@@ -52,11 +52,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.valid_years
-    
-    min_year = Invoice.minimum('substr(number, 6, 9)').to_i
+
+    min_year = Invoice.minimum('substr(number, instr(number, "/") + 1)').to_i
 
     max_year = Date.today.year + 1
-    
+
     return min_year..max_year
 
   end
@@ -77,8 +77,8 @@ class Invoice < ActiveRecord::Base
       max_number = 0
 
       # find the maximum number of that year
-      current_year_invoices.each do |invoice|  
-        current_number = invoice.number.split('/')[0].to_i 
+      current_year_invoices.each do |invoice|
+        current_number = invoice.number.split('/')[0].to_i
         if current_number > max_number
           max_number=current_number
         end
@@ -108,12 +108,12 @@ class Invoice < ActiveRecord::Base
     ret = []
     unless footer.nil?
       # prepare evaluated formulas
-      footer.footer_items.each do |footer_item| 
+      footer.footer_items.each do |footer_item|
         # description = footer_item.description
         # percentage_label = footer_item.percentage_label
         instanced_formula = footer_item.formula % {:TOT => base_amount}
 
-        # evaluating 
+        # evaluating
         calculated_value = Proc.new {
           $SAFE = 4  # change level only inside this proc
           begin
@@ -125,8 +125,8 @@ class Invoice < ActiveRecord::Base
 
         ret << {
           :percentage_label => footer_item.percentage_label,
-          :description => footer_item.description, 
-          :calculated_value => calculated_value, 
+          :description => footer_item.description,
+          :calculated_value => calculated_value,
           :summable => footer_item.summable
         }
       end
@@ -151,14 +151,14 @@ class Invoice < ActiveRecord::Base
 
   def payment_info(current_user)
     info = PaymentInfo.new
-    
+
     if !payment_mode
       info.payment_mode = PaymentMode.where({:is_default => true}).first
     else
       info.payment_mode = payment_mode
     end
     info.payment_term = term
-    
+
     return info
   end
 
