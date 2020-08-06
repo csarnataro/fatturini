@@ -1,28 +1,8 @@
 == README
 
-Test.. This README would normally document whatever steps are necessary to get the
-application up and running.
+This is my personal invoicing system, built on Ruby on Rails 4.0.0 a few years ago.
+It served me well for years (when I was a freelancer) but it's not maintained anymore.
 
-Things you may want to cover:
+It was originally hosted on Openshift in the free tier, that's why there are many references to Openshift environment variable, (like `<%=ENV['OPENSHIFT_APP_NAME']%>`).
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+I'm storing it here on GitHub for future reference (or in case a become a freelancer again).
