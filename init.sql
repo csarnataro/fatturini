@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS fatturini_development;
+CREATE DATABASE IF NOT EXISTS fatturini_test;

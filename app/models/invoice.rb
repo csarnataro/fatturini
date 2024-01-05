@@ -115,7 +115,9 @@ class Invoice < ActiveRecord::Base
 
         # evaluating
         calculated_value = Proc.new {
-          $SAFE = 4  # change level only inside this proc
+          ### NOT SURE WHY I WAS USING Proc.new INSTEAD OF SIMPLY `eval()`
+          ### PROBABLY TO SANDBOX THE EXECUTION? WAS IT REALLY WORKING?
+          # $SAFE = 4  # change level only inside this proc
           begin
             eval(instanced_formula)
           rescue SecurityError
